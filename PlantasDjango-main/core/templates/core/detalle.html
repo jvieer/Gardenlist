@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+
+{% block css %}
+{% endblock %}
+
+
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in productos %}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="{{x.producto.imagen.url}}" alt="" height="80px" width="60px">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{ x.producto.nombre }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>$ {{ x.producto.precio | intcomma }}</h5>
+                            </td>
+                            <td>
+                                <h5>{{ x.cantidad }}</h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    ${{ x.total | intcomma}}
+                                </h5>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                        <tr class="bottom_button">
+                            <td>
+                               
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+    
+
+
+
+{% block js %}
+
+{% endblock %}

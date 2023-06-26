@@ -1,0 +1,253 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aroma Shop - Category</title>
+  {% block css %}
+
+  {% endblock %}
+</head>
+
+<body>
+  <!--================ Start Header Menu Area =================-->
+
+  <!--================ End Header Menu Area =================-->
+
+  <!-- ================ start banner area ================= -->
+  <section class="" style="background-color:#dbe3da;">
+    <div class="container">
+      <div class="row no-gutters align-items-center pt-60px">
+        <div class="col-5 d-none d-sm-block">
+          <div class="hero-banner__img">
+            <img class="img-fluid " src="{% static 'core/img/fotos/4a.png' %}" alt="">
+          </div>
+        </div>
+        <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+          <div class="hero-banner__content">
+            <h1 style="font-family: 'Besttia Brush', sans-serif;">Tienda</h1>
+            <nav aria-label="breadcrumb" class="banner-breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tienda</li>
+              </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ================ end banner area ================= -->
+
+
+  <!-- ================ category section start ================= -->
+
+  <div class="text-center">
+
+
+
+    </nav>
+  </div>
+  <section class="section-margin--small mb-5">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-xl-3 col-lg-4 col-md-5">
+          <div class="sidebar-categories">
+            <div class="head">Categoria</div>
+            <ul class="main-categories">
+              <li class="common-filter">
+                <form action="#">
+
+                  <ul>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label
+                        for="men">Macetero<span></span> <!-- Cantidad --> </label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label
+                        for="men">Tierra de hojas<span></span> <!-- Cantidad --> </label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label
+                        for="men">Flores<span></span> <!-- Cantidad --> </label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label
+                        for="men">Arbustos<span></span> <!-- Cantidad --> </label></li>
+
+                    {% if user.is_superuser %}
+                    <hr>
+                    <li class="filter-list"><a href="{% url 'add' %}" style="text-decoration: none;"><i
+                          class="ti-plus"></i> <label style="color: black;"> Agregar Productos</label></a></li>
+                    {% endif %}
+                  </ul>
+
+                </form>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="col-xl-9 col-lg-8 col-md-7">
+          <!-- Start Filter Bar -->
+          <div class="filter-bar d-flex flex-wrap align-items-center">
+
+            <div>
+              <div class="input-group filter-bar-search">
+                <input type="text" placeholder="buscar">
+                <div class="input-group-append">
+                  <button type="button"><i class="ti-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Filter Bar -->
+          <!-- Start Best Seller -->
+          <section class="section-margin calc-60px">
+            <div class="container">
+
+              <div class="row">
+                {% if user.is_authenticated%}
+                  {% if user.is_superuser %}
+                    {% for aux in listado %}
+                      <div class="col-md-7 col-lg-5 col-xl-4">
+                        <div class="card text-center card-product">
+                          <div class="card-product__img">
+                            {% if aux.imagen %}
+                            <img class="card-img" src="{{ aux.imagen.url }}">
+                            {% else %}
+                            <img class="card-img" src="{% static 'core/img/Image_not_available.png' %}">
+                            {% endif %}
+                            <ul class="card-product__imgOverlay">
+                              <li><a href="{% url 'singleproduct' aux.id %}"><button><i class="ti-search"></i></button></a>
+                              </li>
+                              <li><a href="{% url 'cartadd' aux.id %}"><button><i class="ti-shopping-cart"></i></button></li>
+                              </a>
+                              <li><button onclick="deleteProducto({{ aux.id }})"><i class="ti-trash"></i></button></li>
+                              <li><a href="{% url 'update' aux.id %}"><button><i class="ti-pencil"></i></button></li></a>
+                            </ul>
+                          </div>
+                          <div class="card-body">
+                            <p>{{ aux.tipo }}</p>
+                            <h4 class="card-product__title"><a href="{% url 'singleproduct' aux.id %}">{{ aux.nombre }}</a>
+                            </h4>
+                            <p class="card-product__price">${{ aux.precio | intcomma}}</p>
+                            <p class="card-product__price">Stock: {{ aux.stock }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+
+                  {% elif user.id == 4 %}
+                    {% for aux in listado %}
+                      <div class="col-md-7 col-lg-5 col-xl-4">
+                        <div class="card text-center card-product">
+                          <div class="card-product__img">
+                            {% if aux.imagen %}
+                            <img class="card-img" src="{{ aux.imagen.url }}">
+                            {% else %}
+                            <img class="card-img" src="{% static 'core/img/Image_not_available.png' %}">
+                            {% endif %}
+                            <ul class="card-product__imgOverlay">
+                              <li><a href="{% url 'singleproduct' aux.id %}"><button><i class="ti-search"></i></button></a>
+                              </li>
+                              <li><a href="{% url 'cartadd' aux.id %}"><button><i class="ti-shopping-cart"></i></button></li>
+                              </a>
+                            </ul>
+                          </div>
+                          <div class="card-body">
+                            <p>{{ aux.tipo }}</p>
+                            <h4 class="card-product__title"><a href="{% url 'singleproduct' aux.id %}">{{ aux.nombre }}</a>
+                            </h4>
+                            <p class="card-product__price">${{ aux.precio | intcomma}}</p>
+                            <p class="card-product__price">Stock: {{ aux.stock }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  {% elif user.id == 5 %}
+                    {% for aux in listado %}
+                      <div class="col-md-7 col-lg-5 col-xl-4">
+                        <div class="card text-center card-product">
+                          <div class="card-product__img">
+                            {% if aux.imagen %}
+                            <img class="card-img" src="{{ aux.imagen.url }}">
+                            {% else %}
+                            <img class="card-img" src="{% static 'core/img/Image_not_available.png' %}">
+                            {% endif %}
+                            <ul class="card-product__imgOverlay">
+                              <li><a href="{% url 'singleproduct' aux.id %}"><button><i class="ti-search"></i></button></a>
+                              </li>
+                              <li><a href="{% url 'cartadd' aux.id %}"><button><i class="ti-shopping-cart"></i></button></li>
+                              </a>
+                            </ul>
+                          </div>
+                          <div class="card-body">
+                            <p>{{ aux.tipo }}</p>
+                            <h4 class="card-product__title"><a href="{% url 'singleproduct' aux.id %}">{{ aux.nombre }}</a>
+                            </h4>
+                            <p class="card-product__price" style="text-decoration: line-through;">${{ aux.precio | intcomma}}</p>
+                            <p class="card-product__price" style="">${{ aux.precio_descuento | intcomma}}</p>
+                            <p class="card-product__price">Stock: {{ aux.stock }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+                  {% else %}
+                  {% for aux in listado %}
+                  <div class="col-md-7 col-lg-5 col-xl-4">
+                    <div class="card text-center card-product">
+                      <div class="card-product__img">
+                        {% if aux.imagen %}
+                        <img class="card-img" src="{{ aux.imagen.url }}">
+                        {% else %}
+                        <img class="card-img" src="{% static 'core/img/Image_not_available.png' %}">
+                        {% endif %}
+                        <ul class="card-product__imgOverlay">
+                          <li><a href="{% url 'singleproduct' aux.id %}"><button><i class="ti-search"></i></button></a>
+                          </li>
+                          <li><a href="{% url 'login' %}"><button><i class="ti-shopping-cart"></i></button></a></li>
+                        </ul>
+                      </div>
+                      <div class="card-body">
+                        <p>{{ aux.tipo }}</p>
+                        <h4 class="card-product__title"><a href="{% url 'singleproduct' aux.id %}">{{ aux.nombre }}</a>
+                        </h4>
+                        <p class="card-product__price">${{ aux.precio | intcomma}}</p>
+                        <p class="card-product__price">Stock: {{ aux.stock }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+              {% include 'core/paginator.html' %}
+
+            </div>
+          </section>
+          <!-- End Best Seller -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ category section end ================= -->
+
+
+
+  <!--================ Start footer Area  =================-->
+  {% endblock %}
+  <!--================ End footer Area  =================-->
+
+
+
+  {% block js %}
+
+  {% endblock %}
+</body>
+
+</html>

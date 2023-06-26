@@ -1,0 +1,165 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+
+
+{% block css %}
+
+{% endblock %}
+
+
+    <!--================ Start Header Menu Area =================-->
+
+    <!--================ End Header Menu Area =================-->
+
+    <!-- ================ start banner area ================= -->
+    <section class="" style="background-color:#dbe3da;">
+        <div class="container">
+          <div class="row no-gutters align-items-center pt-60px">
+            <div class="col-5 d-none d-sm-block" >
+              <div class="hero-banner__img" style="padding-bottom: 0px;">
+                <img class="img-fluid " style="padding-left: 45%" src="{% static 'core/img/fotos/shoppingcart.png' %}" alt="">
+              </div>
+            </div>
+            <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+              <div class="hero-banner__content">
+                <h1 style="font-family: 'Besttia Brush', sans-serif;">Carrito de Compras</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <!-- ================ end banner area ================= -->
+
+
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in items %}
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="{{x.producto.imagen.url}}" alt="" height="80px" width="60px">
+                                            </div>
+                                            <div class="media-body">
+                                                <p>{{ x.producto.nombre }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>${{ x.producto.precio | intcomma}}</h5>
+                                    </td>
+                                    <td>
+                                        <h5><a href="{% url 'cartaddd'  x.producto.id %}" style="text-decoration: none;"><i class="ti-angle-up"></i></a>
+                                            {{ x.cantidad }}
+                                            <a href="{% url 'cartdel'  x.producto.id %}" style="text-decoration: none;"><i class="ti-angle-down"></i></a>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>${{ x.subtotal | intcomma}}</h5>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'cartdelete' x.producto.id %}" style="text-decoration: none;"><i class="ti-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                            <tr class="bottom_button">
+                                <td>
+                                   
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Total</h5>
+                                </td>
+                                <td>
+                                    <h5>${{total | intcomma}}</h5>
+                                </td>
+                            </tr>
+                            <tr class="shipping_area">
+                                <td class="d-none d-md-block">
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    
+                                </td>
+                                <td>
+                                    <div class="shipping_box">
+                                        <h6>Detalles del envio <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                        <select class="shipping_select">
+                                            <option value="1">Despacho a domicilio: $7.560</option>
+                                            <option value="2">Retiro en tienda: $0</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="out_button_area">
+                                <td class="d-none-l">
+
+                                </td>
+                                <td class="">
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" href="{% url 'category' %}">Seguir Comprando</a>
+                                        <a class="primary-btn ml-1" href="{% url 'checkout' %}">Continuar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+
+
+    <!--================ Start footer Area  =================-->
+    {% endblock %}
+    <!--================ End footer Area  =================-->
+
+
+
+    {% block js %}
+
+    {% endblock %}

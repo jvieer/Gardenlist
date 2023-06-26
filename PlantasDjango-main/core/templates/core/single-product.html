@@ -1,0 +1,392 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+
+{% block css %}
+
+{% endblock %}
+
+
+<div class="product_image_area">
+	<div class="container">
+		<div class="row s_product_inner">
+			<div class="col-lg-6">
+				<div class="single-prd-item">
+					<img class="img-fluid" src="{{ producto.imagen.url }}" alt="">
+				</div>
+			</div>
+
+			<div class="col-lg-5 offset-lg-1">
+				<div class="s_product_text">
+					<h3> {{ producto.nombre }}</h3>
+					<h2>${{ producto.precio | intcomma }}</h2>
+					<ul class="list">
+						<li><span>Categoria</span>: {{ producto.tipo }}</li>
+						<li><span>Stock</span>: {{ producto.stock }}</li>
+						<li>{{producto.descripcion}}</li>
+					</ul>
+					{% if user.is_authenticated %}
+					<p><a class="button primary-btn" href=" {% url 'cartadd' producto.id %}">Añadir al carro</a></p>
+					{% else %}
+					<p><a class="button primary-btn" href=" {% url 'login' %}">Añadir al carro</a></p>
+					{% endif %}
+					<div class="card_area d-flex align-items-center">
+						{% if user.is_authenticated %}
+						<button type="button" class="btn btn-primary" id="myBtn" style="background-color: blue;"><i class="ti-heart"></i> </button>
+						{% endif %}
+						<div class="toast mt-3">
+							<div class="toast-body">
+								Se agregó a la lista de deseados
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!--================End Single Product Area =================-->
+
+<!--================Product Description Area =================-->
+<section class="product_description_area">
+	<div class="container">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+					aria-selected="true">Descripcion</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+					aria-controls="profile" aria-selected="false">Especificaciones</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+					aria-controls="contact" aria-selected="false">Comentarios</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
+					aria-controls="review" aria-selected="false">Reseñas</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<p>{{ producto.descripcion }}</p>
+			</div>
+			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				<div class="table-responsive">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>
+									<h5>Width</h5>
+								</td>
+								<td>
+									<h5>128mm</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h5>Height</h5>
+								</td>
+								<td>
+									<h5>508mm</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h5>Depth</h5>
+								</td>
+								<td>
+									<h5>85mm</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h5>Weight</h5>
+								</td>
+								<td>
+									<h5>52gm</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h5>Quality checking</h5>
+								</td>
+								<td>
+									<h5>yes</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h5>Freshness Duration</h5>
+								</td>
+								<td>
+									<h5>03days</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h5>When packeting</h5>
+								</td>
+								<td>
+									<h5>Without touch of hand</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h5>Each Box contains</h5>
+								</td>
+								<td>
+									<h5>60pcs</h5>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="comment_list">
+							<div class="review_item">
+								<div class="media">
+									<div class="d-flex">
+										<img src="{% static 'core/img/product/review-1.png'%}" alt="">
+									</div>
+									<div class="media-body">
+										<h4>Blake Ruiz</h4>
+										<h5>12 de Febrero, 2018</h5>
+										<a class="reply_btn" href="#">Responder</a>
+									</div>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+									laboris nisi ut aliquip ex ea
+									commodo</p>
+							</div>
+							<div class="review_item reply">
+								<div class="media">
+									<div class="d-flex">
+										<img src="{% static 'core/img/product/review-1.png'%}" alt="">
+									</div>
+									<div class="media-body">
+										<h4>Blake Ruiz</h4>
+										<h5>12 de Febrero, 2018</h5>
+										<a class="reply_btn" href="#">Responder</a>
+									</div>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+									laboris nisi ut aliquip ex ea
+									commodo</p>
+							</div>
+							<div class="review_item">
+								<div class="media">
+									<div class="d-flex">
+										<img src="{% static 'core/img/product/review-1.png'%}" alt="">
+									</div>
+									<div class="media-body">
+										<h4>Blake Ruiz</h4>
+										<h5>12 de Febrero, 2018</h5>
+										<a class="reply_btn" href="#">Responder</a>
+									</div>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+									laboris nisi ut aliquip ex ea
+									commodo</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="review_box">
+							<h4>Añadir un comentario</h4>
+							<form class="row contact_form" action="contact_process.php" method="post" id="contactForm"
+								novalidate="novalidate">
+								<div class="col-md-12">
+									<div class="form-group">
+										<input type="text" class="form-control" id="name" name="name"
+											placeholder="Nombre">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<input type="email" class="form-control" id="email" name="email"
+											placeholder="Correo electrónico">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<input type="text" class="form-control" id="number" name="number"
+											placeholder="Número de telefono">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea class="form-control" name="message" id="message" rows="1"
+											placeholder="Mensaje"></textarea>
+									</div>
+								</div>
+								<div class="col-md-12 text-right">
+									<button type="submit" class="button button--active button-review">Añadir comentario</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="row total_rate">
+							<div class="col-6">
+								<div class="box_total">
+									<h5>Promedio</h5>
+									<h4>5.0</h4>
+									<h6>(3 Reseñas)</h6>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="rating_list">
+									<h3>Basado en 3 reseñas</h3>
+									<ul class="list">
+										<li><a href="#">5 Estrellas <i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i> 1</a></li>
+										<li><a href="#">4 Estrellas <i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i> 0</a></li>
+										<li><a href="#">3 Estrellas <i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i> 0</a></li>
+										<li><a href="#">2 Estrellas <i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i> 0</a></li>
+										<li><a href="#">1 Estrellas <i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i><i
+													class="fa fa-star"></i><i class="fa fa-star"></i> 0</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="review_list">
+							<div class="review_item">
+								<div class="media">
+									<div class="d-flex">
+										<img src="{% static 'core/img/product/review-1.png'%}" alt="">
+									</div>
+									<div class="media-body">
+										<h4>Blake Ruiz</h4>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+									laboris nisi ut aliquip ex ea
+									commodo</p>
+							</div>
+							<div class="review_item">
+								<div class="media">
+									<div class="d-flex">
+										<img src="{% static 'core/img/product/review-1.png'%}" alt="">
+									</div>
+									<div class="media-body">
+										<h4>Blake Ruiz</h4>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+									laboris nisi ut aliquip ex ea
+									commodo</p>
+							</div>
+							<div class="review_item">
+								<div class="media">
+									<div class="d-flex">
+										<img src="{% static 'core/img/product/review-1.png'%}" alt="">
+									</div>
+									<div class="media-body">
+										<h4>Blake Ruiz</h4>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+									</div>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+									incididunt ut labore et
+									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+									laboris nisi ut aliquip ex ea
+									commodo</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="review_box">
+							<h4>Añadir reseña</h4>
+							<p>Tu puntuación:</p>
+							<ul class="list">
+								<li><a href="#"><i class="fa fa-star"></i></a></li>
+								<li><a href="#"><i class="fa fa-star"></i></a></li>
+								<li><a href="#"><i class="fa fa-star"></i></a></li>
+								<li><a href="#"><i class="fa fa-star"></i></a></li>
+								<li><a href="#"><i class="fa fa-star"></i></a></li>
+							</ul>
+							<form action="#/" class="form-contact form-review mt-3">
+								<div class="form-group">
+									<input class="form-control" name="name" type="text" placeholder="Nombre" required>
+								</div>
+								<div class="form-group">
+									<input class="form-control" name="email" type="email"
+										placeholder="Correo electrónico" required>
+								</div>
+								<div class="form-group">
+									<textarea class="form-control different-control w-100" name="textarea" id="textarea"
+										cols="30" rows="5" placeholder="Mensaje"></textarea>
+								</div>
+								<div class="form-group text-center text-md-right mt-3">
+									<button type="submit" class="button button--active button-review">Subir
+										reseña</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End Product Description Area =================-->
+
+
+<!--================ Start footer Area  =================-->
+{% endblock %}
+<!--================ End footer Area  =================-->
+
+
+
+{% block js %}
+<script>
+	$(document).ready(function () {
+		$("#myBtn").click(function () {
+			$('.toast').toast('show');
+		});
+	});
+</script>
+{% endblock %}

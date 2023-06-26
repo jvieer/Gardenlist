@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aroma Shop</title>
+	{% block css %}
+
+  {% endblock %}
+</head>
+<body>
+  <!--================ Start Header Menu Area =================-->
+
+	<!--================ End Header Menu Area =================-->
+  
+	<!-- ================ start banner area ================= -->	
+
+	<!-- ================ end banner area ================= -->
+  
+  <!--================Order Details Area =================-->
+  <section class="order_details section-margin--small">
+    <div class="container">
+      <p class="text-center billing-alert">Gracias. Tu pedido ya fue recibido.</p>
+      <div class="row mb-5">
+        <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+          <div class="confirmation-card">
+            <h3 class="billing-title">Información pedido</h3>
+            <table class="order-rable">
+              <tr>
+                <td>Order number</td>
+                <td>: 26</td>
+              </tr>
+              <tr>
+                <td>Date</td>
+                <td>: 23/05/2023</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>: $ 50,000</td>
+              </tr>
+              <tr>
+                <td>Payment method</td>
+                <td>: WebPay </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-4 mb-4 mb-xl-0">
+          <div class="confirmation-card">
+            <h3 class="billing-title">Shipping Address</h3>
+            <table class="order-rable">
+              <tr>
+                <td>Street</td>
+                <td>: Dirección usuario*</td>
+              </tr>
+              <tr>
+                <td>City</td>
+                <td>: Dirección usuario*</td>
+              </tr>
+              <tr>
+                <td>Country</td>
+                <td>: Dirección usuario*</td>
+              </tr>
+              <tr>
+                <td>Postcode</td>
+                <td>: Dirección usuario*</td>
+              </tr>
+              
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="order_details_table">
+        <h2>Detalles del pedido</h2>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr>
+                  <td>
+                    <p>{{ x.producto.nombre }}</p>
+                  </td>
+                  <td>
+                    <h5>x {{ x.cantidad }}</h5>
+                  </td>
+                  <td>
+                    <p>$ {{ x.subtotal | intcomma}}</p>
+                  </td>
+                </tr>
+              <tr>
+                <td>
+                  <h4>Subtotal</h4>
+                </td>
+                <td>
+                  <h5></h5>
+                </td>
+                <td>
+                  <p>$ {{ total | intcomma }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Envío</h4>
+                </td>
+                <td>
+                  <h5></h5>
+                </td>
+                <td>
+                  <p>$ 7,560 </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Total</h4>
+                </td>
+                <td>
+                  <h5></h5>
+                </td>
+                <td>
+                  <h4>$ {{ total_final | intcomma }}</h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <a href="{% url 'miscompras' %}" class="btn btn-primary">Acceder a mis Compras</a>
+    </div>
+    
+  </section>
+  <!--================End Order Details Area =================-->
+
+
+
+  <!--================ Start footer Area  =================-->	
+	{% endblock %}
+	<!--================ End footer Area  =================-->
+
+
+
+  {% block js %}
+
+  {% endblock %}
+</body>
+</html>

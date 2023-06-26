@@ -1,0 +1,130 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aroma Shop - Checkout</title>
+  {% block css %}
+
+  {% endblock %}
+</head>
+
+<body>
+  <!--================ Start Header Menu Area =================-->
+
+  <!--================ End Header Menu Area =================-->
+
+  <!-- ================ start banner area ================= -->
+
+  <!-- ================ end banner area ================= -->
+
+
+  <!--================Checkout Area =================-->
+  <section class="checkout_area section-margin--small">
+    <div class="container">
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>Detalles de compra</h3>
+            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="first" name="name" placeholder="Primer nombre">
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="last" name="name" placeholder="Apellido">
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="number" name="number" placeholder="Número de teléfono">
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="email" name="compemailany" placeholder="Email">
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="email" name="compemailany" placeholder="Comuna">
+              </div>
+              <div class="col-md-6 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="add1" placeholder="Ciudad">
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add2" name="add2" placeholder="Nombre calle">
+              </div>
+              <div class="col-md-4 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" placeholder="Nro. casa">
+              </div>
+              <div class="col-md-4 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" placeholder="Nro. dpto (ocpional)">
+              </div>
+              <div class="col-md-4 form-group">
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Código postal">
+              </div>
+              <div class="col-md-12 form-group mb-0">
+                <div class="creat_account">
+                  <h3>Detalles de envío</h3>
+                </div>
+                <textarea class="form-control" name="message" id="message" rows="1"
+                  placeholder="Comentarios adicionales (opcional)"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Tú pedido</h2>
+              <ul class="list">
+                <li><a href="#">
+                    <h4>Productos <span>Total</span></h4>
+                  </a></li>
+                {% for x in items %}
+                <li><a href="#">{{ x.producto.nombre }} x{{ x.cantidad }} <span class="middle"></span> <span class="last">$ {{x.subtotal | intcomma}}</span></a>
+                </li>
+                {% endfor %}
+              </ul>
+              <ul class="list list_2">
+                <li><a href="#">Subtotal <span>$ {{total | intcomma}}</span></a></li>
+                <li><a href="#">Envío: <span>$ 7,560</span></a></li>
+                <li><a href="#">Total <span>$ {{ total_final | intcomma}}</span></a></li>
+              </ul>
+              <div class="payment_item active">
+                <div class="radion_btn">
+                  <input type="radio" id="f-option6" name="selector">
+                  <label for="f-option6"> Webpay </label>
+                  <img src="{% static 'core/img/fotos/webpay.png' %}" alt="">
+                  <div class="check"></div>
+                </div>
+                <p>Pagar vía Webpay: nuestro método de pago seguro y confiable, te permite realizar transacciones rápidas y seguras en nuestro sitio web. Aceptamos todas las principales tarjetas de crédito y débito.</p>
+              </div>
+              <div class="creat_account">
+                <input type="checkbox" id="f-option4" name="selector">
+                <label for="f-option4">he leído y acepto los </label>
+                <a href="#">terminos de uso y condiciones*</a>
+              </div>
+              <div class="text-center">
+                <a class="button button-paypal" href="{% url 'add_compra' %} ">Proceder al pago</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================  End Checkout Area  =================-->
+
+
+
+  <!--================ Start footer Area  =================-->
+  {% endblock %}
+  <!--================ End footer Area  =================-->
+
+
+
+  {% block js %}
+
+  {% endblock %}
+</body>
+
+</html>

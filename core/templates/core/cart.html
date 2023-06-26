@@ -1,0 +1,217 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+
+
+{% block css %}
+
+{% endblock %}
+
+
+    <!--================ Start Header Menu Area =================-->
+
+    <!--================ End Header Menu Area =================-->
+
+    <!-- ================ start banner area ================= -->
+    <section class="" style="background-image: url({% static 'core/img/fotos/fondo_v7.png' %});">
+        <div class="container" style="text-align: center;">
+          <div class="pt-60px" >
+                <h1 style="color: white; font-family: 'Ontario', sans-serif; font-size: 60px;">Carrito de Compras</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                  <ol class="breadcrumb" >
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Carrito</li>
+                    <br><br>
+                  </ol>
+          </div>
+        </div>
+      </section>
+    <!-- ================ end banner area ================= -->
+
+
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in items %}
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="{{x.producto.imagen.url}}" alt="" height="80px" width="60px">
+                                            </div>
+                                            <div class="media-body">
+                                                <p>{{ x.producto.nombre }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>${{ x.producto.precio | intcomma}}</h5>
+                                    </td>
+                                    <td>
+                                        <h5><a href="{% url 'cartaddd'  x.producto.id %}" style="text-decoration: none;"><i class="ti-angle-up"></i></a>
+                                            {{ x.cantidad }}
+                                            <a href="{% url 'cartdel'  x.producto.id %}" style="text-decoration: none;"><i class="ti-angle-down"></i></a>
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        <h5>${{ x.subtotal | intcomma}}</h5>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'cartdelete' x.producto.id %}" style="text-decoration: none;"><i class="ti-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                            <tr class="bottom_button">
+                                <td>
+                                   
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Total</h5>
+                                </td>
+                                <td>
+                                    <h5>${{total | intcomma}}</h5>
+                                </td>
+                            </tr>
+                            <tr class="shipping_area">
+                                <td class="d-none d-md-block">
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr class="out_button_area">
+                                <td class="d-none-l">
+
+                                </td>
+                                <td class="">
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" href="{% url 'category' %}">Seguir Comprando</a>
+                                        <p><div id="btnPaypal">
+                                        </div></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+
+
+    <!--================ Start footer Area  =================-->
+    {% endblock %}
+    <!--================ End footer Area  =================-->
+
+
+
+    {% block js %}
+      <script src="http://www.paypalobjects.com/api/checkout.js"></script>
+      <script>
+        paypal.Button.render({
+            env: 'sandbox',
+            client: {
+                sandbox: 'AW6rdbuaxR2Z6ZvY8cTorjUGr-iJxTDHwaHgCYZZU_4brg--ve-GdRzPAZ8HhJuhCdqbJKrRtHQOlLjZ',
+                production: 'demo_production_client:id'
+            },
+            locale: 'es_CL',
+            style: {
+                size: 'large', // small, medium, large
+                color: 'gold', // gold,black
+                shape: 'rect' // pill , rect
+            },
+            commit: true,
+            payment: function (data,actions){
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: '{{total}}',
+                            currency: 'USD'
+                        }
+                    }]
+                })
+            },
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function(){
+                    // Logica despues del pago
+                    Swal.fire({
+                        title: 'Pago Exitoso',
+                        text: 'Pago realizado correctamente',
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Confirmar'
+                    });
+                })
+            },
+            onCancel(data) {
+                Swal.fire({
+                    title: 'Pago Cancelado',
+                    text: 'El pago ha sido cancelado!',
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirmar'
+                    });
+            },
+            onError(err) {
+                Swal.fire({
+                    title: 'Error al pagar',
+                    text: 'Ha ocurrido un error con el pago!',
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirmar'
+                    });
+            }
+        }, '#btnPaypal')
+      </script>  
+    {% endblock %}

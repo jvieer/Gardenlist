@@ -1,0 +1,87 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+{% load humanize %}
+
+
+{% block css %}
+
+{% endblock %}
+
+
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nro. Orden</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Detalles</th>
+                            <th scope="col">Seguimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in data %}
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <h5> {{ x.compra.id }}</h5>
+                                        </div>
+                                        <div class="media-body">
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <h5>$ {{ x.total | intcomma }}</h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        En proceso
+                                    </h5>
+                                </td>
+                                <td>
+                                    <a href="{% url 'detalle' x.compra.id %}" style="text-decoration: none;"><i class="ti-angle-right"></i></a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'trackingorder' %}" style="text-decoration: none;"><i class="ti-angle-right"></i></a>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        
+                        <tr class="bottom_button">
+                            <td>
+                               
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
+
+
+
+{% block js %}
+{% endblock %}

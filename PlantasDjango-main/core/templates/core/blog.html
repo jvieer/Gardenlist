@@ -1,0 +1,213 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+
+
+{% block css %}
+{% endblock %}
+
+
+
+<!--================ Start Header Menu Area =================-->
+
+<!--================ End Header Menu Area =================-->
+
+
+<!-- ================ start banner area ================= -->
+<section class="" style="background-color:#dbe3da;">
+  <div class="container">
+    <div class="row no-gutters align-items-center pt-60px">
+      <div class="col-5 d-none d-sm-block">
+        <div class="hero-banner__img" style="padding-bottom: 0px;">
+          <img class="img-fluid " style="padding-left: 45%" src="{% static 'core/img/fotos/garden.png' %}" alt="">
+        </div>
+      </div>
+      <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+        <div class="hero-banner__content">
+          <h1 style="font-family: 'Besttia Brush', sans-serif;">Sobre Nosotros</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+
+<!--================Blog Categorie Area =================-->
+<section class="about-us-area">
+  <div class="container">
+    <br><br>
+    <div class="row justify-content-between">
+
+
+      {% if user.id <= 4 %} <div class="col-12 col-lg-5">
+          <!-- Section Heading -->
+          <div class="section-heading">
+            <h2>Sobre nosotross</h2>
+            <p>Somos una comunidad de vecinos que decidió vender productos de jardinería para para ayudar a fundación sin
+              fines de lucro</p>
+          </div>
+          <p>Si quieres aportar con tu granito de arena a esta fundación sin fines de lucro puedes suscribirte a nuestro
+            sitio web y acceder a un beneficio del 5% de descuento en nuestros productos</p>
+          {% if user.is_authenticated %}
+          <a class="button button--active mt-3 mt-xl-4" href="{% url 'index' %}">Suscribirse</a>
+          {% else %}
+          <a class="button button--active mt-3 mt-xl-4" href="{% url 'login' %}">Suscribirse</a>
+          {% endif %}
+          <div class="alazea-progress-bar mb-50">
+            <img src="{% static 'core/img/fotos/2a.png' %}" alt="">
+          </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="alazea-benefits-area">
+          <div class="row">
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <img src="{% static 'core/img/fotos/b1.png' %}" alt="">
+                <br><br>
+                <h5>Productos de calidad</h5>
+                <p>Nos enorgullece brindar productos de calidad superior. Desde la selección de materiales hasta los
+                  rigurosos controles de calidad, garantizamos la excelencia en cada etapa. Su satisfacción es nuestra
+                  prioridad máxima.</p>
+              </div>
+            </div>
+
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <img src="{% static 'core/img/fotos/b2.png' %}" alt="">
+                <br><br>
+                <h5>Servicio Perfecto</h5>
+                <p>Nuestro objetivo es ofrecer un servicio perfecto a nuestros clientes. Desde el primer contacto hasta la
+                  entrega, nos esforzamos por brindar atención personalizada, respuesta rápida y soluciones efectivas. Su
+                  satisfacción es nuestra máxima prioridad.</p>
+              </div>
+            </div>
+
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <br>
+                <img src="{% static 'core/img/fotos/b3.png' %}" alt="">
+                <br><br>
+                <h5>100% Natural</h5>
+                <p>Nuestros productos son 100% naturales, sin aditivos ni ingredientes artificiales. Nos comprometemos a
+                  ofrecer opciones saludables y respetuosas con el medio ambiente, cuidando de su bienestar y brindándole
+                  lo mejor que la naturaleza tiene para ofrecer.</p>
+              </div>
+            </div>
+
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <br>
+                <img src="{% static 'core/img/fotos/b4.png' %}" alt="">
+                <br><br>
+                <h5>Ecofriendly</h5>
+                <p>Nuestros productos son eco-friendly, diseñados con un enfoque sostenible en mente. Utilizamos
+                  materiales reciclables y procesos de producción conscientes del medio ambiente para reducir nuestro
+                  impacto. Al elegir nuestros productos, contribuyes a la preservación del planeta.</p>
+              </div>
+            </div>
+
+          </div>
+          <br><br>
+        </div>
+      </div>
+    {% else %}
+      <div class="col-12 col-lg-5">
+        <!-- Section Heading -->
+        <div class="section-heading">
+          <h2>Sobre nosotross</h2>
+          <p>Somos una comunidad de vecinos que decidió vender productos de jardinería para para ayudar a fundación sin
+            fines de lucro</p>
+        </div>
+        <p>Si quieres aportar con tu granito de arena a esta fundación sin fines de lucro puedes suscribirte a nuestro
+          sitio web y acceder a un beneficio del 5% de descuento en nuestros productos</p>
+        {% if user.is_authenticated %}
+        <a class="button button--active mt-3 mt-xl-4" href="{% url 'index' %}">Desuscribirse</a>
+        <br><br>
+        <p>Fecha de suscripción: 20/05/2023</p>
+        <p>Fecha de renovación: 20/06/2023</p>
+        {% else %}
+        <a class="button button--active mt-3 mt-xl-4" href="{% url 'login' %}">Suscribirse</a>
+        {% endif %}
+        <div class="alazea-progress-bar mb-50">
+          <img src="{% static 'core/img/fotos/2a.png' %}" alt="">
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="alazea-benefits-area">
+          <div class="row">
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <img src="{% static 'core/img/fotos/b1.png' %}" alt="">
+                <br><br>
+                <h5>Productos de calidad</h5>
+                <p>Nos enorgullece brindar productos de calidad superior. Desde la selección de materiales hasta los
+                  rigurosos controles de calidad, garantizamos la excelencia en cada etapa. Su satisfacción es nuestra
+                  prioridad máxima.</p>
+              </div>
+            </div>
+
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <img src="{% static 'core/img/fotos/b2.png' %}" alt="">
+                <br><br>
+                <h5>Servicio Perfecto</h5>
+                <p>Nuestro objetivo es ofrecer un servicio perfecto a nuestros clientes. Desde el primer contacto hasta la
+                  entrega, nos esforzamos por brindar atención personalizada, respuesta rápida y soluciones efectivas. Su
+                  satisfacción es nuestra máxima prioridad.</p>
+              </div>
+            </div>
+
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <br>
+                <img src="{% static 'core/img/fotos/b3.png' %}" alt="">
+                <br><br>
+                <h5>100% Natural</h5>
+                <p>Nuestros productos son 100% naturales, sin aditivos ni ingredientes artificiales. Nos comprometemos a
+                  ofrecer opciones saludables y respetuosas con el medio ambiente, cuidando de su bienestar y brindándole
+                  lo mejor que la naturaleza tiene para ofrecer.</p>
+              </div>
+            </div>
+
+            <!-- Single Benefits Area -->
+            <div class="col-12 col-sm-6">
+              <div class="single-benefits-area">
+                <br>
+                <img src="{% static 'core/img/fotos/b4.png' %}" alt="">
+                <br><br>
+                <h5>Ecofriendly</h5>
+                <p>Nuestros productos son eco-friendly, diseñados con un enfoque sostenible en mente. Utilizamos
+                  materiales reciclables y procesos de producción conscientes del medio ambiente para reducir nuestro
+                  impacto. Al elegir nuestros productos, contribuyes a la preservación del planeta.</p>
+              </div>
+            </div>
+
+          </div>
+          <br><br>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  </div>
+</section>
+<!--================Blog Categorie Area =================-->
+
+{% endblock %}
+
+
+
+
+{% block js %}
+
+{% endblock %}

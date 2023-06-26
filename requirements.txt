@@ -1,0 +1,11 @@
+django == 3.1.2
+django-admin-interface
+django-crispy-forms
+pillow
+django-rest-framework
+django-paypal
+paypal-checkout-serversdk
+requests
+pymysql
+mysqlclient
+django-jazzmin
